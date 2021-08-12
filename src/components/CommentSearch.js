@@ -1,20 +1,33 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Loader from "./Loader";
+import axiosInstance from "../util/axios";
 
 const CommentSearch = () => {
-  const [postId, setPostId] = useState(0);
+  const [postIdNew, setPostId] = useState(0);
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const getData = () => {
-    axios(
-      `https://jsonplaceholder.typicode.com/comments?postId=${postId}`
-    ).then((response) => {
-      setIsLoading(false);
-      setComments(response.data);
-      console.log(comments);
-    });
+    // axios(
+    //   `https://jsonplaceholder.typicode.com/comments?postId=${postId}`
+    // ).then((response) => {
+    //   setIsLoading(false);
+    //   setComments(response.data);
+    //   console.log(comments);
+    // });
+
+    axiosInstance
+      .get("/comments", {
+        params: {
+          postId: postIdNew,
+        },
+      })
+      .then((response) => {
+        setIsLoading(false);
+        setComments(response.data);
+        console.log(comments);
+      });
   };
 
   const searchComment = () => {
@@ -45,7 +58,7 @@ const CommentSearch = () => {
           </div>
         ))}
       {comments.length === 0
-        ? `No comments available for postid: ${postId}`
+        ? `No comments available for postid: ${postIdNew}`
         : ""}
     </div>
   );
