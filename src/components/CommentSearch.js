@@ -4,7 +4,7 @@ import Loader from "./Loader";
 import axiosInstance from "../util/axios";
 
 const CommentSearch = () => {
-  const [postIdNew, setPostId] = useState(0);
+  const [postId, setPostId] = useState(0);
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -20,7 +20,7 @@ const CommentSearch = () => {
     axiosInstance
       .get("/comments", {
         params: {
-          postId: postIdNew,
+          postId,
         },
       })
       .then((response) => {
@@ -58,7 +58,7 @@ const CommentSearch = () => {
           </div>
         ))}
       {comments.length === 0
-        ? `No comments available for postid: ${postIdNew}`
+        ? `No comments available for postid: ${postId}`
         : ""}
     </div>
   );
