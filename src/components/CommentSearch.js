@@ -20,6 +20,7 @@ const CommentSearch = () => {
     axiosInstance
       .get("/comments", {
         params: {
+          //added comments only
           postId: postIdNew,
         },
       })
@@ -50,7 +51,7 @@ const CommentSearch = () => {
         comments.map((comment) => (
           <div>
             {" "}
-            ID : {comment.id} <br />
+            ID : this is where i change {comment.id} <br />
             Body : {comment.body} <br />
             Email : {comment.email}
             <br />
